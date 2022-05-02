@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sora';
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#hex{
+    font-size: 70px;
+}
+
+#btn{
+    padding: 15px;
+    border: 0px;
+    border-radius: 8px;
+    color: white;
+    background-color: black;
+    cursor: pointer;
+}
