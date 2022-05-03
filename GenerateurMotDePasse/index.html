@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="style.css" />
+        <script src="script.js" defer></script>
+        <title>Générateur Mot De Passe</title>
+    </head>
+    <body>
+        <h1>Générateur Mot De Passe</h1>
+        <h2 id="mdp">Ceci est un mot de passe généré</h2>
+        <div id="erreurContainer">
+            <p class="erreur"> Au moins une case doit être coché </p>
+            <p class="erreur"> La taille doit être comprise entre 0 et 60 </p>
+        </div>
+        <button id="btnGenerer">Générer</button>
+        <div id="Formulaire">
+            <div class="optionContainer">
+                <p>minuscules : </p>
+                <input id="inputMin" type="checkbox">
+            </div>
+            <div class="optionContainer">
+                <p>majuscules : </p>
+                <input id="inputMaj" type="checkbox">
+            </div>
+            <div class="optionContainer">
+                <p>Caractères spéciaux : </p>
+                <input id="inputCarSpec" type="checkbox">
+            </div>
+            <div class="optionContainer">
+                <p>Nombres : </p>
+                <input id="inputNumber" type="checkbox">
+            </div>
+            <div class="optionContainer">
+                <p>Taille : </p>
+                <input id="inputLenght" type="number">
+            </div>
+        </div>
+    </body>
+</html>

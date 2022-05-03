@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Sora';
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+button{
+    cursor: pointer;
+    border: 0;
+    padding: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin-top: 50px;
+}
+
+#mdp{
+    margin-top: 50px;
+    color: #333333;
+}
+
+#Formulaire{
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.optionContainer{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.erreur{
+    font-weight: bold;
+    color: red;
+    text-align: center;
+}
