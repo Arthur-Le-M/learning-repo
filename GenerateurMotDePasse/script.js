@@ -6,6 +6,11 @@ const inputMin = document.getElementById("inputMin")
 const inputCarSpec = document.getElementById("inputCarSpec")
 const inputNumber = document.getElementById("inputNumber")
 const mdpLength = document.getElementById("inputLenght")
+const btnSave = document.getElementById("btnSauvegarder")
+var popup = document.getElementById("popup")
+btnAnnulerPopup = document.getElementById("btnClose")
+btnValiderPopup = document.getElementById("btnValider")
+inputSaveMDP = document.getElementById('inputNameMdp')
 
 textMdp.textContent = ""
 mdpLength.value = 15
@@ -14,6 +19,8 @@ inputMin.checked = true
 inputCarSpec.checked = true
 inputNumber.checked = true
 removeAllChildNodes(erreurContainer)
+closePopup(popup)
+
 
 btn.addEventListener('click', ()=>{
     removeAllChildNodes(erreurContainer)
@@ -30,10 +37,49 @@ btn.addEventListener('click', ()=>{
         erreurContainer.appendChild(err2)
     }
     else{
+        textMdp.style.color = "#333333"
         textMdp.textContent = genererMotDePasse(mdpLength.value, inputMaj.checked, inputMin.checked, inputCarSpec.checked, inputNumber.checked);
     }
 })
 
+textMdp.addEventListener('click', ()=>{
+    textMdp.style.color = "#42f569"
+    var message = document.createElement("p")
+    message.classList.add("message")
+    message.textContent = "Copié !"
+    erreurContainer.appendChild(message)
+    navigator.clipboard.writeText(textMdp.textContent)
+})
+
+btnSave.addEventListener('click', ()=>{
+    if(textMdp.textContent != ""){
+        openPopup(popup)
+    }
+    else{
+        var message = document.createElement("p")
+        textMdp.style.color = '#1f84ff'
+        message.classList.add("erreur")
+        message.textContent = "Il faut d'abord générer un mot de passe"
+        erreurContainer.appendChild(message)
+    }
+    
+})
+
+btnAnnulerPopup.addEventListener('click', ()=>{
+    closePopup(popup)
+})
+
+btnValiderPopup.addEventListener('click', ()=>{
+    removeAllChildNodes(erreurContainer)
+    var message = document.createElement("p")
+    textMdp.style.color = '#1f84ff'
+    message.classList.add("messageSave")
+    message.textContent = "Ce mot de passe à été sauvegarde sous le nom " + inputSaveMDP.value
+    erreurContainer.appendChild(message)
+    inputSaveMDP.value = ""
+    //Sauvegarder dans la bd
+    closePopup(popup)
+})
 
 function genererMotDePasse(longueur, MajB=true, MinB=true, SpecCharB=true, NumberB=true){
     min = "abcdefghijklmnopqrstuvwxyz";
@@ -74,4 +120,13 @@ function removeAllChildNodes(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
+}
+
+function openPopup(e){
+    e.style.display = 'flex'
+    
+}
+
+function closePopup(e){
+    e.style.display = 'none'
 }

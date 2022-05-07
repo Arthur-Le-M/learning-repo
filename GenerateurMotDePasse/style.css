@@ -15,18 +15,20 @@ body{
     min-height: 100vh;
 }
 
+
 button{
     cursor: pointer;
     border: 0;
     padding: 10px;
     padding-left: 30px;
     padding-right: 30px;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
 #mdp{
     margin-top: 50px;
     color: #333333;
+    cursor: pointer;
 }
 
 #Formulaire{
@@ -46,3 +48,35 @@ button{
     color: red;
     text-align: center;
 }
+
+.message{
+    font-weight: bold;
+    color: #42f569;
+    text-align: center;
+}
+
+.messageSave{
+    font-weight: bold;
+    color: #1f84ff;
+    text-align: center;
+}
+
+input{
+    border: 0;
+    background-color: #efefef;
+    padding: 10px;
+}
+
+#inputLenght{
+padding: 3px;
+}
+
+#popup{
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 50px;
+    border: #333333 5px solid;
+}
+

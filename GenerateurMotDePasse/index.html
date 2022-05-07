@@ -7,13 +7,24 @@
         <title>Générateur Mot De Passe</title>
     </head>
     <body>
+        <div id="popup">
+            <h4>Entrez un nom pour votre mot de passe</h4>
+            <input id="inputNameMdp" type="text">
+            <button id="btnValider">Valider</button>
+            <button id="btnClose">Annuler</button>
+        </div>
+        
         <h1>Générateur Mot De Passe</h1>
         <h2 id="mdp">Ceci est un mot de passe généré</h2>
         <div id="erreurContainer">
             <p class="erreur"> Au moins une case doit être coché </p>
             <p class="erreur"> La taille doit être comprise entre 0 et 60 </p>
+            <p class="message">Copié !</p>
+            <p class="messageSave">Ce mot de passe à été sauvegarde sous le nom [nom]</p>
         </div>
+        
         <button id="btnGenerer">Générer</button>
+        <button id="btnSauvegarder">Sauvegarder</button>
         <div id="Formulaire">
             <div class="optionContainer">
                 <p>minuscules : </p>
