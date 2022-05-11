@@ -2,8 +2,35 @@ tabCases = document.querySelectorAll('.case')
 tabCasesConv = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1],
                 [1, 2], [2, 0], [2, 1], [2, 2]]
 body = document.getElementsByTagName('body')[0]
+boutonPlay = document.getElementById('buttonPlay')
+plateauJeu = document.getElementById('tableau')
+indicJoueur = document.getElementById('indicateurJoueur')
 
-p = creerPlateau()
+//Initialisation
+indicJoueur.style.display = "none"
+plateauJeu.style.display = "none"
+
+
+
+//Bouton Play
+boutonPlay.addEventListener('click', ()=>{
+    joueurEnCours = ["1"]
+    p = creerPlateau()
+    indicJoueur.textContent = "Joueur " + joueurEnCours[0]
+    if(joueurEnCours[0] == "1"){
+        indicJoueur.style.color = "#ff0000"
+    }
+    else{
+        indicJoueur.style.color ="#006eff"
+    }
+    indicJoueur.style.display = "block"
+    plateauJeu.style.display = "block"
+    boutonPlay.style.display = 'none'
+})
+
+
+//Affichage Morpion
+
 joueurEnCours = ["1"]
 for(i = 0; i<tabCases.length; i++){
         (function(index){
@@ -21,15 +48,19 @@ function jouerJoueur(numJoueur, index){
     if(numJoueur[0] == "1"){
         placer(p, "x", tabCasesConv[index][0], tabCasesConv[index][1])
         tabCases[index].style.backgroundColor = "#ff0000"
+        indicJoueur.textContent = "Joueur 2"
+        indicJoueur.style.color ="#006eff"
         if (verifVictoire(p, "x", tabCasesConv[index][0], tabCasesConv[index][1])){
-        body.style.backgroundColor = "#c5ffa6"
+        body.style.backgroundColor = "#ffc7c7"
         }
     }
     else{
         placer(p, "o", tabCasesConv[index][0], tabCasesConv[index][1])
         tabCases[index].style.backgroundColor = "#006eff"
+        indicJoueur.textContent = "Joueur 1"
+        indicJoueur.style.color = "#ff0000"
         if (verifVictoire(p, "o", tabCasesConv[index][0], tabCasesConv[index][1])){
-        body.style.backgroundColor = "#c5ffa6"
+        body.style.backgroundColor = "#7db1ff"
         }
     }
     
