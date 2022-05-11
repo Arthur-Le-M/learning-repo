@@ -1,12 +1,52 @@
-tabCases = document.getElementsByClassName('case')
+tabCases = document.querySelectorAll('.case')
 tabCasesConv = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1],
                 [1, 2], [2, 0], [2, 1], [2, 2]]
+body = document.getElementsByTagName('body')[0]
 
-for(var i = 0; i<tabCases.length; i++){
-    tabCases[i];addEventListener('click', ()=>{
-        console.log(i)
-    })
+p = creerPlateau()
+joueurEnCours = ["1"]
+for(i = 0; i<tabCases.length; i++){
+        (function(index){
+            tabCases[index].addEventListener('click', function cliqueCase(){
+                if(p[tabCasesConv[index][0]][tabCasesConv[index][1]] == "empty"){
+                    jouerJoueur(joueurEnCours, index)
+                    changementJoueur(joueurEnCours)
+                }
+                
+            })
+        }(i))
+    }
+
+function jouerJoueur(numJoueur, index){
+    if(numJoueur[0] == "1"){
+        placer(p, "x", tabCasesConv[index][0], tabCasesConv[index][1])
+        tabCases[index].style.backgroundColor = "#ff0000"
+        if (verifVictoire(p, "x", tabCasesConv[index][0], tabCasesConv[index][1])){
+        body.style.backgroundColor = "#c5ffa6"
+        }
+    }
+    else{
+        placer(p, "o", tabCasesConv[index][0], tabCasesConv[index][1])
+        tabCases[index].style.backgroundColor = "#006eff"
+        if (verifVictoire(p, "o", tabCasesConv[index][0], tabCasesConv[index][1])){
+        body.style.backgroundColor = "#c5ffa6"
+        }
+    }
+    
 }
+
+function changementJoueur(numJoueur){
+    if(numJoueur[0] == "1"){
+        numJoueur[0] = "2"
+        console.log("changement " + numJoueur[0])
+    }
+    else{
+        numJoueur[0] = "1"
+        console.log("changement " + numJoueur[0])
+    }
+    
+}
+
 // Jeu du Morpion
 
 function creerPlateau(){
