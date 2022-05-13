@@ -1,3 +1,4 @@
+//Variable DOM
 tabCases = document.querySelectorAll('.case')
 tabCasesConv = [[0, 0], [0, 1], [0, 2], [1, 0], [1, 1],
                 [1, 2], [2, 0], [2, 1], [2, 2]]
@@ -9,13 +10,15 @@ indicJoueur = document.getElementById('indicateurJoueur')
 //Initialisation
 indicJoueur.style.display = "none"
 plateauJeu.style.display = "none"
-
+var peuJouer = true
 
 
 //Bouton Play
 boutonPlay.addEventListener('click', ()=>{
     joueurEnCours = ["1"]
     p = creerPlateau()
+    body.style.backgroundColor ="#FFFFFF"
+    peuJouer = true
     indicJoueur.textContent = "Joueur " + joueurEnCours[0]
     if(joueurEnCours[0] == "1"){
         indicJoueur.style.color = "#ff0000"
@@ -30,14 +33,22 @@ boutonPlay.addEventListener('click', ()=>{
 
 
 //Affichage Morpion
-
 joueurEnCours = ["1"]
 for(i = 0; i<tabCases.length; i++){
         (function(index){
             tabCases[index].addEventListener('click', function cliqueCase(){
-                if(p[tabCasesConv[index][0]][tabCasesConv[index][1]] == "empty"){
+                if(p[tabCasesConv[index][0]][tabCasesConv[index][1]] == "empty" && peuJouer == true){
                     jouerJoueur(joueurEnCours, index)
                     changementJoueur(joueurEnCours)
+                    if(verifNul(p)){
+                        //Cas du match nul
+                        peuJouer = false
+                        console.log("Match Nul")
+                        body.style.backgroundColor = "#d6d6d6"
+                        indicJoueur.textContent = "Pas de gagnant !"
+                        indicJoueur.style.color = "#a2a2a2"
+                        finPartie(p)
+                    }
                 }
                 
             })
@@ -51,7 +62,12 @@ function jouerJoueur(numJoueur, index){
         indicJoueur.textContent = "Joueur 2"
         indicJoueur.style.color ="#006eff"
         if (verifVictoire(p, "x", tabCasesConv[index][0], tabCasesConv[index][1])){
-        body.style.backgroundColor = "#ffc7c7"
+            //Victoire joueur 1
+            peuJouer = false
+            body.style.backgroundColor = "#ffc7c7"
+            indicJoueur.textContent = "Joueur 1 a gagné !"
+            indicJoueur.style.color = "#ff0000"
+            finPartie(p)
         }
     }
     else{
@@ -60,7 +76,12 @@ function jouerJoueur(numJoueur, index){
         indicJoueur.textContent = "Joueur 1"
         indicJoueur.style.color = "#ff0000"
         if (verifVictoire(p, "o", tabCasesConv[index][0], tabCasesConv[index][1])){
-        body.style.backgroundColor = "#7db1ff"
+            //Victoire joueur 2
+            peuJouer = false
+            body.style.backgroundColor = "#7db1ff"
+            indicJoueur.textContent = "Joueur 2 a gagné !"
+            indicJoueur.style.color ="#006eff"
+            finPartie(p)
         }
     }
     
@@ -78,8 +99,22 @@ function changementJoueur(numJoueur){
     
 }
 
-// Jeu du Morpion
 
+function finPartie(plateau){
+    //Réaffichage des éléments
+    boutonPlay.textContent = "Rejouer"
+    boutonPlay.style.display = "block"
+    //Effacement des éléments
+    plateauJeu.style.display = "none"
+
+    //Remise à 0 des cases
+    for(i=0; i<tabCases.length; i++){
+        tabCases[i].style.backgroundColor = "rgb(239, 239, 239)"
+    }
+
+}
+
+// Jeu du Morpion Modele
 function creerPlateau(){
     var plateau = []
     for(var i=0; i<3; i++){
@@ -160,7 +195,21 @@ function verifVictoire(plateau, signeJoueur, x, y){
     }
 }
 
+//Verification match nul
+function verifNul(plateau){
+    var nul = true
+    for(var i=0; i<plateau.length;i++){
+        for(var y=0; y< plateau[i].length;y++){
+            if(plateau[i][y] == "empty"){
+                nul = false
+                console.log("heho")
+            }
+        }
+    }
+    return nul
+}
 
+//Jeu dans la console
 function jouerJeu(){
     //Définition des signes
     signeJoueur1 = prompt("Joueur 1, choisissez votre signe : ")
