@@ -64,7 +64,6 @@ function jouerJoueur(numJoueur, index){
         if (verifVictoire(p, "x", tabCasesConv[index][0], tabCasesConv[index][1])){
             //Victoire joueur 1
             peuJouer = false
-            body.style.backgroundColor = "#ffc7c7"
             indicJoueur.textContent = "Joueur 1 a gagné !"
             indicJoueur.style.color = "#ff0000"
             finPartie(p)
@@ -78,7 +77,6 @@ function jouerJoueur(numJoueur, index){
         if (verifVictoire(p, "o", tabCasesConv[index][0], tabCasesConv[index][1])){
             //Victoire joueur 2
             peuJouer = false
-            body.style.backgroundColor = "#7db1ff"
             indicJoueur.textContent = "Joueur 2 a gagné !"
             indicJoueur.style.color ="#006eff"
             finPartie(p)
