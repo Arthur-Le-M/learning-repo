@@ -3,17 +3,20 @@ boutonValider = document.getElementById('valid')
 textVille = document.getElementById('ville')
 textTemperature = document.getElementById('temp')
 divErr = document.getElementById('erreurContainer')
+iconeTemps = document.getElementById('imgState')
 body = document.getElementsByTagName('body')[0]
 
 apiLink = "https://goweather.herokuapp.com/weather/"
 removeAllChildNodes(divErr);
 textVille.style.display = 'none'
 textTemperature.style.display = 'none'
+iconeTemps.style.display = 'none'
 
 boutonValider.addEventListener('click', ()=>{
     removeAllChildNodes(divErr);
     req = apiLink + inputVille.value
-    
+    textVille.textContent = 'Chargement...'
+    textVille.style.display = 'block'
 
     //Fetch
     fetch(req)
@@ -34,16 +37,32 @@ boutonValider.addEventListener('click', ()=>{
         else{
             textVille.style.display = 'block'
             textTemperature.style.display = 'block'
+            iconeTemps.style.display = 'block'
             textVille.textContent = inputVille.value
-            textTemperature.textContent = value['temperature']
-            if(tempToInt(value['temperature']) <= 10){
-                body.style.backgroundColor = "#cbeaf7"
+            //Icone temps
+            
+            if(value['description'] == "Sunny"){
+                iconeTemps.src = "images/sun.png"
             }
-            else if(tempToInt(value['temperature']) <= 20){
-                body.style.backgroundColor = "#ebf7cb"
+            else if(value['description'] == "Rain shower"){
+                iconeTemps.src = "images/rain.png"
+            }
+            else if(value['description'] == "Partly cloudy"){
+                iconeTemps.src = "images/partlyCloudy.png"
             }
             else{
-                body.style.backgroundColor = "#f7ddcb"
+                iconeTemps.src = "images/cloud.png"
+            }
+            //Temperature
+            textTemperature.textContent = value['temperature']
+            if(tempToInt(value['temperature']) <= 10){
+                body.style.backgroundColor = "#a8def7"
+            }
+            else if(tempToInt(value['temperature']) <= 20){
+                body.style.backgroundColor = "#fff1ab"
+            }
+            else{
+                body.style.backgroundColor = "#ffd2ab"
             }
         }
     })

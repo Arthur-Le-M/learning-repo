@@ -54,3 +54,8 @@ button:active{
     color: red;
     font-weight: bold;
 }
+
+#imgState{
+    width: 100px;
+    height: 100px;
+}
